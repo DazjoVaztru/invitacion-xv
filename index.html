@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>XV Años de Alejandra</title>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --azul-claro: #a8dadc;
+            --azul-oscuro: #457b9d;
+            --crema: #f1faee;
+            --texto: #1d3557;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--crema);
+            color: var(--texto);
+            text-align: center;
+        }
+
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            background-image: radial-gradient(circle, #ffffff 0%, #f1faee 100%);
+        }
+
+        h1 {
+            font-family: 'Great Vibes', cursive;
+            font-size: 4rem;
+            color: var(--azul-oscuro);
+            margin: 20px 0;
+        }
+
+        .poema {
+            font-style: italic;
+            font-size: 0.9rem;
+            line-height: 1.6;
+            margin-bottom: 30px;
+            padding: 0 10px;
+        }
+
+        .fecha-bloque {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.5rem;
+            border-top: 1px solid var(--azul-claro);
+            border-bottom: 1px solid var(--azul-claro);
+            padding: 15px 0;
+            margin: 30px 0;
+        }
+
+        .contador {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            margin-bottom: 40px;
+        }
+
+        .tiempo-unidad {
+            background: white;
+            padding: 10px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+
+        .tiempo-valor {
+            display: block;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .btn {
+            display: block;
+            background-color: var(--azul-oscuro);
+            color: white;
+            padding: 15px;
+            margin: 10px 0;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: bold;
+            transition: transform 0.2s;
+        }
+
+        .btn:active { transform: scale(0.95); }
+
+        .icono { font-size: 2rem; margin-bottom: 10px; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="poema">
+        "Dicen que el destino vive en nuestro interior. Hoy tomo mi arco para apuntar al futuro, brillar con luz propia y alcanzar nuevas metas..."
+    </div>
+
+    <h1>Alejandra</h1>
+
+    <div class="contador" id="cuentaAtras">
+        <div class="tiempo-unidad"><span class="tiempo-valor" id="dias">00</span>Días</div>
+        <div class="tiempo-unidad"><span class="tiempo-valor" id="horas">00</span>Hrs</div>
+        <div class="tiempo-unidad"><span class="tiempo-valor" id="minutos">00</span>Min</div>
+        <div class="tiempo-unidad"><span class="tiempo-valor" id="segundos">00</span>Seg</div>
+    </div>
+
+    <div class="fecha-bloque">
+        <span>SÁBADO</span>
+        <span style="font-size: 3rem; margin: 0 20px;">23</span>
+        <span>MAYO</span>
+    </div>
+
+    <div class="seccion">
+        <div class="icono">⛪</div>
+        <p><strong>Ceremonia Religiosa</strong><br>
+        Santuario de Coculco - 4:00 p.m.</p>
+        <a href="https://maps.google.com" target="_blank" class="btn">Ver Ubicación</a>
+    </div>
+
+    <div class="seccion" style="margin-top: 40px;">
+        <div class="icono">🥂</div>
+        <p><strong>Recepción</strong><br>
+        Calle Amado Nervo Sur #728<br>Ajalpan, Puebla.</p>
+        <a href="https://maps.google.com" target="_blank" class="btn">Cómo llegar al Salón</a>
+    </div>
+
+    <a href="https://forms.gle/tu-formulario" target="_blank" class="btn" style="background-color: #a8dadc; color: #1d3557; margin-top: 50px;">
+        CONFIRMAR ASISTENCIA
+    </a>
+</div>
+
+<script>
+    // Configura la fecha del evento: 23 de Mayo de 2026 a las 16:00
+    const fechaEvento = new Date('May 23, 2026 16:00:00').getTime();
+
+    const x = setInterval(function() {
+        const ahora = new Date().getTime();
+        const distancia = fechaEvento - ahora;
+
+        const d = Math.floor(distancia / (1000 * 60 * 60 * 24));
+        const h = Math.floor((distancia % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const m = Math.floor((distancia % (1000 * 60 * 60)) / (1000 * 60));
+        const s = Math.floor((distancia % (1000 * 60)) / 1000);
+
+        document.getElementById("dias").innerHTML = d;
+        document.getElementById("horas").innerHTML = h;
+        document.getElementById("minutos").innerHTML = m;
+        document.getElementById("segundos").innerHTML = s;
+
+        if (distancia < 0) {
+            clearInterval(x);
+            document.getElementById("cuentaAtras").innerHTML = "¡ES HOY!";
+        }
+    }, 1000);
+</script>
+
+</body>
+</html>
