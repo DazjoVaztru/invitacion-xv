@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>XV Años Alejandra</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="favicon.png">
     
     <style>
-        /* === IMPORTAR FUENTE PERSONALIZADA === */
         @font-face {
             font-family: 'Above The Beyond';
             src: url('above-the-beyond-script-regular-gfxtracom.ttf') format('truetype'); 
@@ -15,7 +15,6 @@
             font-style: normal;
         }
 
-        /* === VARIABLES DE COLOR === */
         :root {
             --azul-fuerte: #456b82; 
             --azul-suave: #8db3c9;
@@ -23,7 +22,6 @@
             --texto-principal: #2c3e50;
         }
 
-        /* === ESTILOS BASE === */
         * { box-sizing: border-box; }
         
         body {
@@ -37,11 +35,123 @@
             overflow-x: hidden;
         }
 
+        /* === PANTALLA DE BIENVENIDA === */
+        #portada {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--crema-fondo);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+            transition: opacity 1s ease;
+        }
+
+        #portada h2 {
+            font-family: 'Above The Beyond', cursive;
+            font-size: 3.5rem;
+            color: var(--azul-suave);
+            margin-bottom: 20px;
+        }
+
+        .btn-entrar {
+            background: transparent;
+            border: 1px solid var(--azul-suave);
+            color: var(--azul-fuerte);
+            padding: 15px 30px;
+            border-radius: 30px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            cursor: pointer;
+            text-transform: uppercase;
+            transition: background 0.3s, color 0.3s;
+        }
+
+        .btn-entrar:hover {
+            background-color: var(--azul-suave);
+            color: white;
+        }
+
+        /* === NUBES DE ACUARELA EN CSS === */
+        #nubes-marco {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -1; /* Se quedan detrás del texto principal */
+            pointer-events: none; /* No interfieren con los clics */
+            opacity: 0; /* Ocultas al inicio */
+            transition: opacity 1.5s ease;
+            display: none;
+            overflow: hidden;
+        }
+
+        .nube-css {
+            position: absolute;
+            background: rgba(141, 179, 201, 0.25); /* Azul suave de la paleta */
+            border-radius: 50%;
+            filter: blur(25px); /* Esto crea el efecto de acuarela esponjosa */
+        }
+        
+        .nube-oro {
+            background: rgba(212, 175, 55, 0.15); /* Tono dorado/crema muy suave */
+        }
+
+        /* Posiciones de las nubes superiores */
+        .n1 { width: 250px; height: 150px; top: -50px; left: -50px; }
+        .n2 { width: 300px; height: 180px; top: -60px; left: 20%; }
+        .n3 { width: 200px; height: 120px; top: 10px; right: 10%; }
+        .n4 { width: 280px; height: 160px; top: -40px; right: -60px; }
+
+        /* Posiciones de las nubes inferiores */
+        .n5 { width: 260px; height: 160px; bottom: -50px; left: -30px; }
+        .n6 { width: 320px; height: 190px; bottom: 20px; left: 25%; }
+        .n7 { width: 220px; height: 130px; bottom: -10px; right: 15%; }
+        .n8 { width: 290px; height: 170px; bottom: -40px; right: -50px; }
+
+
+        /* === BOTÓN DE MÚSICA === */
+        #btnMusica {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.8);
+            border: 1px solid var(--azul-suave);
+            color: var(--azul-fuerte);
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.2rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            display: none;
+        }
+
+        /* === CONTENIDO PRINCIPAL === */
+        #contenido-invitacion {
+            display: none;
+            opacity: 0;
+            transition: opacity 1.5s ease;
+            padding-top: 5vh; 
+            padding-bottom: 5vh; 
+        }
+
         .contenedor {
+            position: relative;
+            z-index: 10;
             max-width: 480px;
             margin: 0 auto;
-            padding: 80px 25px; /* Más aire arriba al no haber imagen */
-            min-height: 100vh;
+            padding: 40px 25px;
         }
 
         /* === ANIMACIONES === */
@@ -55,12 +165,11 @@
             animation: fadeHaciaArriba 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
         }
         
-        .retraso-1 { animation-delay: 0.3s; } /* Poema */
-        .retraso-2 { animation-delay: 0.9s; } /* Nombre */
-        .retraso-3 { animation-delay: 1.4s; } /* Fecha y Contador */
-        .retraso-4 { animation-delay: 1.9s; } /* Detalles e Instagram */
+        .retraso-1 { animation-delay: 0.3s; }
+        .retraso-2 { animation-delay: 0.8s; } 
+        .retraso-3 { animation-delay: 1.4s; } 
+        .retraso-4 { animation-delay: 1.9s; } 
 
-        /* === TIPOGRAFÍA Y ELEMENTOS === */
         .poema {
             font-style: italic;
             font-size: 0.95rem;
@@ -71,13 +180,9 @@
 
         .nombre {
             font-family: 'Above The Beyond', cursive;
-            /* clamp para que sea responsivo y no se corte */
             font-size: clamp(3.5rem, 16vw, 5.5rem); 
             color: var(--azul-suave);
             margin: 0 0 20px 0;
-            font-weight: normal;
-            text-shadow: 1px 1px 3px rgba(0,0,0,0.05);
-            max-width: 100%;
             line-height: 1.1;
         }
 
@@ -102,32 +207,26 @@
             line-height: 1;
         }
 
-        /* === CONTADOR === */
         .contador-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             gap: 10px;
             margin: 35px 0;
-            font-family: 'Montserrat', sans-serif;
         }
 
         .tiempo-valor {
             display: block;
             font-size: 1.5rem;
             color: var(--azul-fuerte);
-            font-weight: 300;
         }
 
         .tiempo-etiqueta {
             font-size: 0.6rem;
             letter-spacing: 1px;
-            color: #7a8c9e;
             text-transform: uppercase;
         }
 
-        /* === BLOQUES DE INFORMACIÓN === */
         .info-bloque { margin: 45px 0; }
-        
         .icono { font-size: 1.8rem; margin-bottom: 10px; opacity: 0.8; }
 
         .btn-elegante {
@@ -141,7 +240,6 @@
             text-decoration: none;
             font-family: 'Montserrat', sans-serif;
             font-size: 0.75rem;
-            letter-spacing: 1.5px;
             text-transform: uppercase;
             transition: all 0.3s ease;
         }
@@ -152,90 +250,130 @@
             box-shadow: 0 4px 12px rgba(141, 179, 201, 0.2);
         }
 
-        /* === INSTAGRAM === */
-        .instagram-seccion {
-            margin-top: 60px;
-        }
-
         .instagram-link {
             color: var(--azul-suave);
             text-decoration: none;
             font-family: 'Montserrat', sans-serif;
             font-size: 1rem;
+            margin-top: 60px;
+            display: block;
             transition: color 0.3s;
         }
-
-        .instagram-link:hover {
-            color: var(--azul-fuerte);
-        }
+        .instagram-link:hover { color: var(--azul-fuerte); }
     </style>
 </head>
 <body>
 
-<div class="contenedor">
-    <div class="poema animar retraso-1">
-        "Dicen que el destino vive en nuestro interior. Hoy tomo mi arco para apuntar al futuro, brillar con luz propia y alcanzar nuevas metas. Te invito a celebrar conmigo el inicio de mi mejor historia."
-    </div>
+<div id="nubes-marco">
+    <div class="nube-css n1"></div>
+    <div class="nube-css nube-oro n2"></div>
+    <div class="nube-css n3"></div>
+    <div class="nube-css nube-oro n4"></div>
+    <div class="nube-css n5"></div>
+    <div class="nube-css nube-oro n6"></div>
+    <div class="nube-css n7"></div>
+    <div class="nube-css nube-oro n8"></div>
+</div>
 
-    <h1 class="nombre animar retraso-2">Alejandra</h1>
+<div id="portada">
+    <h2>Mis XV Años</h2>
+    <button class="btn-entrar" onclick="iniciarInvitacion()">Abrir Invitación</button>
+</div>
 
-    <div class="fecha-bloque animar retraso-3">
-        <span>SÁBADO</span>
-        <span class="dia-numero">23</span>
-        <span>MAYO</span>
-    </div>
+<button id="btnMusica" onclick="controlarMusica()">🎵</button>
 
-    <div class="contador-grid animar retraso-3" id="cuentaAtras">
-        <div><span class="tiempo-valor" id="dias">00</span><span class="tiempo-etiqueta">Días</span></div>
-        <div><span class="tiempo-valor" id="horas">00</span><span class="tiempo-etiqueta">Hrs</span></div>
-        <div><span class="tiempo-valor" id="minutos">00</span><span class="tiempo-etiqueta">Min</span></div>
-        <div><span class="tiempo-valor" id="segundos">00</span><span class="tiempo-etiqueta">Seg</span></div>
-    </div>
+<audio id="cancionFondo" loop>
+    <source src="cancion.mp3" type="audio/mpeg">
+</audio>
 
-    <div class="info-bloque animar retraso-4">
-        <div class="icono">⛪</div>
-        <p style="margin:5px 0;"><strong>Ceremonia Religiosa</strong></p>
-        <p style="margin:0; font-size:0.9rem;">Santuario de Coculco - 4:00 p.m.</p>
-        <a href="https://maps.app.goo.gl/9dEvJKy7jcVGyFGo7" target="_blank" class="btn-elegante">Ver Mapa</a>
-    </div>
+<div id="contenido-invitacion">
+    <div class="contenedor">
+        <div class="poema animar retraso-1">
+            "Dicen que el destino vive en nuestro interior. Hoy tomo mi arco para apuntar al futuro, brillar con luz propia y alcanzar nuevas metas. Te invito a celebrar conmigo el inicio de mi mejor historia."
+        </div>
 
-    <div class="info-bloque animar retraso-4">
-        <div class="icono">🥂</div>
-        <p style="margin:5px 0;"><strong>Recepción</strong></p>
-        <p style="margin:0; font-size:0.9rem;">Calle Amado Nervo Sur #728<br>Ajalpan, Puebla.</p>
-        <a href="https://maps.app.goo.gl/akRw2H2ppRVgy9kaA" target="_blank" class="btn-elegante">Cómo llegar</a>
-    </div>
+        <h1 class="nombre animar retraso-2">Alejandra</h1>
 
-    <div class="instagram-seccion animar retraso-4">
-        <a href="https://www.instagram.com/idk.alks?igsh=MWRhOGJpcGxhbDhhcw==" target="_blank" class="instagram-link">
+        <div class="fecha-bloque animar retraso-3">
+            <span>SÁBADO</span>
+            <span class="dia-numero">23</span>
+            <span>MAYO</span>
+        </div>
+
+        <div class="contador-grid animar retraso-3" id="cuentaAtras">
+            <div><span class="tiempo-valor" id="dias">00</span><span class="tiempo-etiqueta">Días</span></div>
+            <div><span class="tiempo-valor" id="horas">00</span><span class="tiempo-etiqueta">Hrs</span></div>
+            <div><span class="tiempo-valor" id="minutos">00</span><span class="tiempo-etiqueta">Min</span></div>
+            <div><span class="tiempo-valor" id="segundos">00</span><span class="tiempo-etiqueta">Seg</span></div>
+        </div>
+
+        <div class="info-bloque animar retraso-4">
+            <div class="icono">⛪</div>
+            <p style="margin:5px 0;"><strong>Ceremonia Religiosa</strong></p>
+            <p style="margin:0; font-size:0.9rem;">Santuario de Coculco - 4:00 p.m.</p>
+            <a href="https://maps.app.goo.gl/9dEvJKy7jcVGyFGo7" target="_blank" class="btn-elegante">Ver Mapa</a>
+        </div>
+
+        <div class="info-bloque animar retraso-4">
+            <div class="icono">🥂</div>
+            <p style="margin:5px 0;"><strong>Recepción</strong></p>
+            <p style="margin:0; font-size:0.9rem;">Calle Amado Nervo Sur #728<br>Ajalpan, Puebla.</p>
+            <a href="https://maps.app.goo.gl/akRw2H2ppRVgy9kaA" target="_blank" class="btn-elegante">Cómo llegar</a>
+        </div>
+
+        <a href="https://www.instagram.com/idk.alks?igsh=MWRhOGJpcGxhbDhhcw==" target="_blank" class="instagram-link animar retraso-4">
             📸 @idk.alks
         </a>
     </div>
 </div>
 
 <script>
-    // Fecha del evento: 23 de Mayo de 2026
-    const fechaEvento = new Date('May 23, 2026 16:00:00').getTime();
+    const audio = document.getElementById("cancionFondo");
+    const btnMusica = document.getElementById("btnMusica");
 
-    const actualizarContador = setInterval(function() {
-        const ahora = new Date().getTime();
-        const distancia = fechaEvento - ahora;
+    function iniciarInvitacion() {
+        document.getElementById("portada").style.opacity = "0";
+        setTimeout(() => {
+            document.getElementById("portada").style.display = "none";
+            
+            // Mostrar marco de nubes CSS
+            const nubes = document.getElementById("nubes-marco");
+            nubes.style.display = "block";
+            
+            const contenido = document.getElementById("contenido-invitacion");
+            contenido.style.display = "block";
+            btnMusica.style.display = "flex";
+            
+            setTimeout(() => {
+                nubes.style.opacity = "1";
+                contenido.style.opacity = "1";
+            }, 10);
+            
+            audio.play();
+        }, 1000);
+    }
 
-        if (distancia < 0) {
-            clearInterval(actualizarContador);
-            document.getElementById("cuentaAtras").innerHTML = "<p style='grid-column: span 4; font-size: 1.5rem; color: var(--azul-fuerte);'>¡Es el gran día!</p>";
-            return;
+    function controlarMusica() {
+        if (audio.paused) {
+            audio.play();
+            btnMusica.innerHTML = "🎵";
+        } else {
+            audio.pause();
+            btnMusica.innerHTML = "🔇";
         }
+    }
 
-        const d = Math.floor(distancia / (1000 * 60 * 60 * 24));
-        const h = Math.floor((distancia % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const m = Math.floor((distancia % (1000 * 60 * 60)) / (1000 * 60));
-        const s = Math.floor((distancia % (1000 * 60)) / 1000);
-
-        document.getElementById("dias").innerHTML = d < 10 ? '0' + d : d;
-        document.getElementById("horas").innerHTML = h < 10 ? '0' + h : h;
-        document.getElementById("minutos").innerHTML = m < 10 ? '0' + m : m;
-        document.getElementById("segundos").innerHTML = s < 10 ? '0' + s : s;
+    // Contador Mayo 23, 2026
+    const fechaEvento = new Date('May 23, 2026 16:00:00').getTime();
+    setInterval(function() {
+        const ahora = new Date().getTime();
+        const dist = fechaEvento - ahora;
+        if (dist > 0) {
+            document.getElementById("dias").innerHTML = Math.floor(dist / (1000*60*60*24));
+            document.getElementById("horas").innerHTML = Math.floor((dist % (1000*60*60*24)) / (1000*60*60));
+            document.getElementById("minutos").innerHTML = Math.floor((dist % (1000*60*60)) / (1000*60));
+            document.getElementById("segundos").innerHTML = Math.floor((dist % (1000*60)) / 1000);
+        }
     }, 1000);
 </script>
 
