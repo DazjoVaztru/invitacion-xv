@@ -3,158 +3,239 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>XV Años de Alejandra</title>
-    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
+    <title>XV Años Alejandra</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
+    
     <style>
-        :root {
-            --azul-claro: #a8dadc;
-            --azul-oscuro: #457b9d;
-            --crema: #f1faee;
-            --texto: #1d3557;
+        /* === IMPORTAR FUENTE PERSONALIZADA === */
+        @font-face {
+            font-family: 'Above The Beyond';
+            src: url('above-the-beyond-script-regular-gfxtracom.ttf') format('truetype'); 
+            font-weight: normal;
+            font-style: normal;
         }
 
+        /* === VARIABLES DE COLOR === */
+        :root {
+            --azul-fuerte: #456b82; 
+            --azul-suave: #8db3c9;
+            --crema-fondo: #faf9f6;
+            --texto-principal: #2c3e50;
+        }
+
+        /* === ESTILOS BASE === */
+        * { box-sizing: border-box; }
+        
         body {
             margin: 0;
             padding: 0;
-            font-family: 'Montserrat', sans-serif;
-            background-color: var(--crema);
-            color: var(--texto);
+            background-color: var(--crema-fondo);
+            background-image: radial-gradient(circle at center, #ffffff 0%, #eef3f6 100%);
+            color: var(--texto-principal);
+            font-family: 'Playfair Display', serif;
             text-align: center;
+            overflow-x: hidden;
         }
 
-        .container {
-            max-width: 500px;
+        .contenedor {
+            max-width: 480px;
             margin: 0 auto;
-            padding: 40px 20px;
-            background-image: radial-gradient(circle, #ffffff 0%, #f1faee 100%);
+            padding: 80px 25px; /* Más aire arriba al no haber imagen */
+            min-height: 100vh;
         }
 
-        h1 {
-            font-family: 'Great Vibes', cursive;
-            font-size: 4rem;
-            color: var(--azul-oscuro);
-            margin: 20px 0;
+        /* === ANIMACIONES === */
+        @keyframes fadeHaciaArriba {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
+        .animar {
+            opacity: 0; 
+            animation: fadeHaciaArriba 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+        }
+        
+        .retraso-1 { animation-delay: 0.3s; } /* Poema */
+        .retraso-2 { animation-delay: 0.9s; } /* Nombre */
+        .retraso-3 { animation-delay: 1.4s; } /* Fecha y Contador */
+        .retraso-4 { animation-delay: 1.9s; } /* Detalles e Instagram */
+
+        /* === TIPOGRAFÍA Y ELEMENTOS === */
         .poema {
             font-style: italic;
-            font-size: 0.9rem;
-            line-height: 1.6;
-            margin-bottom: 30px;
-            padding: 0 10px;
+            font-size: 0.95rem;
+            line-height: 1.7;
+            color: #5a6b7c;
+            margin-bottom: 40px;
+        }
+
+        .nombre {
+            font-family: 'Above The Beyond', cursive;
+            /* clamp para que sea responsivo y no se corte */
+            font-size: clamp(3.5rem, 16vw, 5.5rem); 
+            color: var(--azul-suave);
+            margin: 0 0 20px 0;
+            font-weight: normal;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.05);
+            max-width: 100%;
+            line-height: 1.1;
         }
 
         .fecha-bloque {
             display: flex;
             justify-content: center;
             align-items: center;
-            font-size: 1.5rem;
-            border-top: 1px solid var(--azul-claro);
-            border-bottom: 1px solid var(--azul-claro);
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+            margin: 40px 0;
             padding: 15px 0;
-            margin: 30px 0;
+            border-top: 1px solid rgba(141, 179, 201, 0.3);
+            border-bottom: 1px solid rgba(141, 179, 201, 0.3);
         }
 
-        .contador {
+        .dia-numero {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            color: var(--azul-fuerte);
+            margin: 0 20px;
+            line-height: 1;
+        }
+
+        /* === CONTADOR === */
+        .contador-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             gap: 10px;
-            margin-bottom: 40px;
-        }
-
-        .tiempo-unidad {
-            background: white;
-            padding: 10px;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            margin: 35px 0;
+            font-family: 'Montserrat', sans-serif;
         }
 
         .tiempo-valor {
             display: block;
-            font-weight: bold;
-            font-size: 1.2rem;
+            font-size: 1.5rem;
+            color: var(--azul-fuerte);
+            font-weight: 300;
         }
 
-        .btn {
-            display: block;
-            background-color: var(--azul-oscuro);
-            color: white;
-            padding: 15px;
-            margin: 10px 0;
+        .tiempo-etiqueta {
+            font-size: 0.6rem;
+            letter-spacing: 1px;
+            color: #7a8c9e;
+            text-transform: uppercase;
+        }
+
+        /* === BLOQUES DE INFORMACIÓN === */
+        .info-bloque { margin: 45px 0; }
+        
+        .icono { font-size: 1.8rem; margin-bottom: 10px; opacity: 0.8; }
+
+        .btn-elegante {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 10px 25px;
+            background: transparent;
+            color: var(--azul-fuerte);
+            border: 1px solid var(--azul-suave);
+            border-radius: 30px;
             text-decoration: none;
-            border-radius: 25px;
-            font-weight: bold;
-            transition: transform 0.2s;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.75rem;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
         }
 
-        .btn:active { transform: scale(0.95); }
+        .btn-elegante:hover {
+            background-color: var(--azul-suave);
+            color: white;
+            box-shadow: 0 4px 12px rgba(141, 179, 201, 0.2);
+        }
 
-        .icono { font-size: 2rem; margin-bottom: 10px; }
+        /* === INSTAGRAM === */
+        .instagram-seccion {
+            margin-top: 60px;
+        }
+
+        .instagram-link {
+            color: var(--azul-suave);
+            text-decoration: none;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1rem;
+            transition: color 0.3s;
+        }
+
+        .instagram-link:hover {
+            color: var(--azul-fuerte);
+        }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <div class="poema">
-        "Dicen que el destino vive en nuestro interior. Hoy tomo mi arco para apuntar al futuro, brillar con luz propia y alcanzar nuevas metas..."
+<div class="contenedor">
+    <div class="poema animar retraso-1">
+        "Dicen que el destino vive en nuestro interior. Hoy tomo mi arco para apuntar al futuro, brillar con luz propia y alcanzar nuevas metas. Te invito a celebrar conmigo el inicio de mi mejor historia."
     </div>
 
-    <h1>Alejandra</h1>
+    <h1 class="nombre animar retraso-2">Alejandra</h1>
 
-    <div class="contador" id="cuentaAtras">
-        <div class="tiempo-unidad"><span class="tiempo-valor" id="dias">00</span>Días</div>
-        <div class="tiempo-unidad"><span class="tiempo-valor" id="horas">00</span>Hrs</div>
-        <div class="tiempo-unidad"><span class="tiempo-valor" id="minutos">00</span>Min</div>
-        <div class="tiempo-unidad"><span class="tiempo-valor" id="segundos">00</span>Seg</div>
-    </div>
-
-    <div class="fecha-bloque">
+    <div class="fecha-bloque animar retraso-3">
         <span>SÁBADO</span>
-        <span style="font-size: 3rem; margin: 0 20px;">23</span>
+        <span class="dia-numero">23</span>
         <span>MAYO</span>
     </div>
 
-    <div class="seccion">
+    <div class="contador-grid animar retraso-3" id="cuentaAtras">
+        <div><span class="tiempo-valor" id="dias">00</span><span class="tiempo-etiqueta">Días</span></div>
+        <div><span class="tiempo-valor" id="horas">00</span><span class="tiempo-etiqueta">Hrs</span></div>
+        <div><span class="tiempo-valor" id="minutos">00</span><span class="tiempo-etiqueta">Min</span></div>
+        <div><span class="tiempo-valor" id="segundos">00</span><span class="tiempo-etiqueta">Seg</span></div>
+    </div>
+
+    <div class="info-bloque animar retraso-4">
         <div class="icono">⛪</div>
-        <p><strong>Ceremonia Religiosa</strong><br>
-        Santuario de Coculco - 4:00 p.m.</p>
-        <a href="https://maps.google.com" target="_blank" class="btn">Ver Ubicación</a>
+        <p style="margin:5px 0;"><strong>Ceremonia Religiosa</strong></p>
+        <p style="margin:0; font-size:0.9rem;">Santuario de Coculco - 4:00 p.m.</p>
+        <a href="https://maps.app.goo.gl/9dEvJKy7jcVGyFGo7" target="_blank" class="btn-elegante">Ver Mapa</a>
     </div>
 
-    <div class="seccion" style="margin-top: 40px;">
+    <div class="info-bloque animar retraso-4">
         <div class="icono">🥂</div>
-        <p><strong>Recepción</strong><br>
-        Calle Amado Nervo Sur #728<br>Ajalpan, Puebla.</p>
-        <a href="https://maps.google.com" target="_blank" class="btn">Cómo llegar al Salón</a>
+        <p style="margin:5px 0;"><strong>Recepción</strong></p>
+        <p style="margin:0; font-size:0.9rem;">Calle Amado Nervo Sur #728<br>Ajalpan, Puebla.</p>
+        <a href="https://maps.app.goo.gl/akRw2H2ppRVgy9kaA" target="_blank" class="btn-elegante">Cómo llegar</a>
     </div>
 
-    <a href="https://forms.gle/tu-formulario" target="_blank" class="btn" style="background-color: #a8dadc; color: #1d3557; margin-top: 50px;">
-        CONFIRMAR ASISTENCIA
-    </a>
+    <div class="instagram-seccion animar retraso-4">
+        <a href="https://www.instagram.com/idk.alks?igsh=MWRhOGJpcGxhbDhhcw==" target="_blank" class="instagram-link">
+            📸 @idk.alks
+        </a>
+    </div>
 </div>
 
 <script>
-    // Configura la fecha del evento: 23 de Mayo de 2026 a las 16:00
+    // Fecha del evento: 23 de Mayo de 2026
     const fechaEvento = new Date('May 23, 2026 16:00:00').getTime();
 
-    const x = setInterval(function() {
+    const actualizarContador = setInterval(function() {
         const ahora = new Date().getTime();
         const distancia = fechaEvento - ahora;
+
+        if (distancia < 0) {
+            clearInterval(actualizarContador);
+            document.getElementById("cuentaAtras").innerHTML = "<p style='grid-column: span 4; font-size: 1.5rem; color: var(--azul-fuerte);'>¡Es el gran día!</p>";
+            return;
+        }
 
         const d = Math.floor(distancia / (1000 * 60 * 60 * 24));
         const h = Math.floor((distancia % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
         const m = Math.floor((distancia % (1000 * 60 * 60)) / (1000 * 60));
         const s = Math.floor((distancia % (1000 * 60)) / 1000);
 
-        document.getElementById("dias").innerHTML = d;
-        document.getElementById("horas").innerHTML = h;
-        document.getElementById("minutos").innerHTML = m;
-        document.getElementById("segundos").innerHTML = s;
-
-        if (distancia < 0) {
-            clearInterval(x);
-            document.getElementById("cuentaAtras").innerHTML = "¡ES HOY!";
-        }
+        document.getElementById("dias").innerHTML = d < 10 ? '0' + d : d;
+        document.getElementById("horas").innerHTML = h < 10 ? '0' + h : h;
+        document.getElementById("minutos").innerHTML = m < 10 ? '0' + m : m;
+        document.getElementById("segundos").innerHTML = s < 10 ? '0' + s : s;
     }, 1000);
 </script>
 
